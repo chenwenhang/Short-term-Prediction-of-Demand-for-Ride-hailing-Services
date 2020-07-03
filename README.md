@@ -5,4 +5,4 @@ The project uses Lasso Regression and LightGBM respectively to predict the deman
 
 ### Dataset
 [Data source](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page)  
-[Data description](./lasso regression/data/README.md)
+[Data description](https://github.com/chenwenhang/Short-term-Prediction-of-Demand-for-Ride-hailing-Services/tree/master/lasso%20regression/data)
