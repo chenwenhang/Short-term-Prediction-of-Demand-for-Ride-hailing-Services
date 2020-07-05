@@ -56,11 +56,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0, test_s
 lightGBM = LGBMClassifier()
 
 # Generate optional parameter dictionary
-num_leaves = [255]
-max_depth = [9]
-learning_rate = [0.1]
-num_class = [y_train.shape[0]]
-objective = ['multiclass']
+num_leaves = [31, 50, 100]
+max_depth = [-1]
+learning_rate = [0.01]
+boosting = ["dart"]
+objective = ['regression']
 
 # Use GPU to accelerate training model
 # device = ['gpu']
@@ -70,10 +70,10 @@ objective = ['multiclass']
 #                   device=device, gpu_platform_id=gpu_platform_id, gpu_device_id=gpu_device_id)
 
 param_grid = dict(num_leaves=num_leaves, max_depth=max_depth, learning_rate=learning_rate,
-                  objective=objective, num_class=num_class)
+                  objective=objective, boosting=boosting)
 
 # Use GridSearchCV to adjust super-parameters automatically
-# Use all CPU cores, five times cross-validation
+# Use all CPU cores, four times cross-validation
 grid_search = GridSearchCV(lightGBM, param_grid, n_jobs=-1, cv=4)
 grid_result = grid_search.fit(X_train, y_train)
 
@@ -90,8 +90,8 @@ for mean, param in zip(means, params):
 model = LGBMClassifier(num_leaves=grid_search.best_params_['num_leaves'],
                        max_depth=grid_search.best_params_['max_depth'],
                        learning_rate=grid_search.best_params_['learning_rate'],
-                       objective=grid_search.best_params_['objective'],
-                       num_class=grid_search.best_params_['num_class']).fit(X_train, y_train)
+                       boosting=grid_search.best_params_['boosting'],
+                       objective=grid_search.best_params_['objective']).fit(X_train, y_train)
 joblib.dump(model, './model/lightGBM.pkl')
 
 # Code running time
