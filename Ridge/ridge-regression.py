@@ -1,8 +1,8 @@
-from sklearn.linear_model import Lasso
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import Ridge
 from sklearn.metrics import r2_score
 import matplotlib.pyplot as plt
 import joblib
@@ -55,7 +55,7 @@ print(y.shape)
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0, test_size=0.3)
 
 # Build model
-lasso = Lasso().fit(X_train, y_train)
+ridgeCV = Ridge()
 
 # Generate optional parameter dictionary
 alpha = [0.0001, 0.001, 0.01, 0.1, 0.2, 0.3]
@@ -64,7 +64,7 @@ param_grid = dict(alpha=alpha, max_iter=max_iter)
 
 # Use GridSearchCV to adjust super-parameters automatically
 # Use all CPU cores, five times cross-validation
-grid_search = GridSearchCV(lasso, param_grid, n_jobs=-1, cv=5)
+grid_search = GridSearchCV(ridgeCV, param_grid, n_jobs=-1, cv=5)
 grid_result = grid_search.fit(X_train, y_train)
 
 # Print best result
@@ -77,9 +77,9 @@ for mean, param in zip(means, params):
     print("%f  with:   %r" % (mean, param))
 
 # Save model
-model = Lasso(alpha=grid_search.best_params_['alpha'],
+model = Ridge(alpha=grid_search.best_params_['alpha'],
               max_iter=grid_search.best_params_['max_iter']).fit(X_train, y_train)
-joblib.dump(model, './model/lasso.pkl')
+joblib.dump(model, './model/ridge.pkl')
 
 # Print final estimate results
 y_hat = model.predict(np.array(X_test))

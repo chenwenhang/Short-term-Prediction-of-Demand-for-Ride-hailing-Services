@@ -3,7 +3,7 @@ import joblib
 import numpy as np
 
 # Read model
-model = joblib.load('./model/lasso.pkl')
+model = joblib.load('./model/ridge.pkl')
 
 # Use model
 test = np.array([[84, 480, 0], [67, 570, 4]])

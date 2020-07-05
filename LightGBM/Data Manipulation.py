@@ -16,7 +16,7 @@ def time_transformation(obj_dt_time, time_interval):
     return time_period
 
 
-df = pd.read_csv('./data/yellow_tripdata_2019-03.csv').dropna(how='any')
+df = pd.read_csv('../data/yellow_tripdata_2019-03.csv').dropna(how='any')
 
 # Extract information of interest from the raw data
 col_of_interest = ['tpep_pickup_datetime', 'passenger_count', 'PULocationID', 'DOLocationID']
@@ -42,4 +42,4 @@ trips = trips[(trips.TimePeriod >= 5 * 60) & (trips.TimePeriod < 23 * 60)]
 
 # Save the results to the external csv files
 trips = trips[['Date', 'Time', 'PULocationID', 'DayofYear', 'DayofWeek', 'TimePeriod', 'passenger_count']]
-trips.to_csv('./data/NY_Taxi_March_2019.csv', index=False)
+trips.to_csv('../data/NY_Taxi_March_2019.csv', index=False)

@@ -10,7 +10,7 @@ import time
 
 # Make sure the data file and python code is in the same folder
 start = time.time()
-trips = pd.read_csv('./data/NY_Taxi_March_2019.csv')
+trips = pd.read_csv('../data/NY_Taxi_March_2019.csv')
 
 # Check data information
 trips.head()
