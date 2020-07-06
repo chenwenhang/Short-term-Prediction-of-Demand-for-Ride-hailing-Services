@@ -1,13 +1,14 @@
 # Short-term prediction of demand for ride-hailing services
 
 ### Introduction
-The project uses Lasso Regression, LightGBM and Ridge Regression respectively to predict the demand for yellow taxis in New York.
+The project uses Lasso Regression, LightGBM, Ridge Regression and DNN respectively to predict the demand for yellow taxis in New York.
 
 ### Result
 | **Model Name** | **R2 Score** |
 | --- | --- |
 | Lasso Regression | 0.8417 |
 | Ridge Regression | 0.8568 |
+| DNN | 0.9386 |
 | LightGBM | 0.0019 |
 
 ### Dataset
