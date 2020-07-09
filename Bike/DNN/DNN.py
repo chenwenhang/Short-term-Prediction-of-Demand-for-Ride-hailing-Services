@@ -78,7 +78,7 @@ model.add(Dense(4, input_dim=n_feature, activation='relu'))
 model.add(Dense(4, activation='relu'))
 model.add(Dense(1, activation='linear'))
 model.compile(loss='mse', optimizer='adam')
-model.fit(X, y, epochs=1000, verbose=0)
+model.fit(X_train, y_train, epochs=1000, verbose=0)
 
 # Predict
 y_hat = model.predict(np.array(X_test))
